@@ -19,8 +19,8 @@
     <div class="container">
       <h4>Select a Major</h4>
       <div style='padding: 5px;'>
-        <button type='button' class="btn" onClick="getData('cit')">CIT</button> 
-        <button type='button' class="btn" onClick="getData('business')">Business</button> 
+        <button type='button' class="btn btn-primary" onClick="getData('cit')">CIT</button> 
+        <button type='button' class="btn btn-primary" onClick="getData('business')">Business</button> 
       </div>
       
       <h3>We filter our database by Majors</h3>
@@ -71,5 +71,32 @@
      request.send(null);
   }
 </script>
+	
+	<script>
+   document.addEventListener('DOBContentLoaded', function () {
+     document.querySelector('#showData').onclick = function() {
+       var request = new XMLHttpRequest();
+       request.open('GET', 'cit5students.json');
+       
+       request.onload = function() {
+         var data = JSON.parse(request.responseText);
+         
+         if (request.status ==200) {
+           var contents = "<table cellspacing='5'><tr><td>Name</td></tr><tr><td>Major</td></tr><tr><td>MidTerm</td></tr><tr><td>Final</td></tr>"
+           
+           for(i=0; i< data.length; i++) {
+             contents += "<tr><td>" + data[i].name = "</td><td>" + data[i].major + "</td><td>" + data[i].midterm + "</td><td>" data[i].final "</td></tr>"
+           }
+           contents += "</table>";
+           document.querySelector('#result').innerHTML = contents;
+         }
+         else {
+           document.querySelector('#result').innerHTML = "There was an error.";
+         }
+   }
+       request.send(null);
+     };
+     
+    </script>
 </html>
       
