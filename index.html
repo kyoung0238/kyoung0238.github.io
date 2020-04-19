@@ -18,13 +18,13 @@
     <div class="container">
       <h4>Select a Major</h4>
       <div style='padding: 5px;'>
-        <button type='button' class="btn btn-primary" onClick="getData('cit')">CIT</button> 
-        <button type='button' class="btn btn-primary" onClick="getData('business')">Business</button> 
+        <button type='button' class="btn" onClick="getData('cit')">CIT</button> 
+        <button type='button' class="btn" onClick="getData('business')">Business</button> 
       </div>
       
       <h3>We filter our database by Majors</h3>
       <div id="majorTable"></div>
-    </div>
+    </div> <!-- end of class container -->
   </body>
   
   <!-- Handlebars template -->
@@ -41,7 +41,7 @@
   <!-- application ajax code -->
   <script>
 
-  function getData(selected_major) {      // called when a button is clicked. paramter selected_meal = breakfast, lunch, or dinner
+  function getData(selected_major) {      // called when a button is clicked. paramter selected_major = business or cit
       var request = new XMLHttpRequest();
       request.open('GET', 'cit5students.json');      // open Ajax request for data file menu_items.json
  
@@ -59,6 +59,14 @@
             compiledHtml = compiledTemplateText({ rows: major_name })          
             document.getElementById('majorTable').innerHTML = compiledHtml; 
         }
+        
+        major_name = []    // new array to hold filtered data
+
+          for(i=0, i < data.length; i++) {
+          if(data[i].major == selected_major) {
+           major_name.push(data[i].major);
+    }
+}
         else {
             document.querySelector('#majorTable').innerHTML = "There was an error.";
         }
