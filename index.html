@@ -59,8 +59,8 @@
         if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
             var templateText = document.getElementById('tableTemplate').innerHTML;
             var compiledTemplateText = Handlebars.compile(templateText);       
-            var compiledHtml = compiledTemplateText({ rows: major_name })          
-            var document.getElementById('majorTable').innerHTML = compiledHtml; 
+            compiledHtml = compiledTemplateText({ rows: major_name })          
+            document.getElementById('majorTable').innerHTML = compiledHtml; 
         }
 }
         else {
