@@ -3,15 +3,41 @@
 <html>
   <head>
     <title>Students By Major</title>
+ <script>
+   document.addEventListener('DOBContentLoaded', function () {
+     document.querySelector('#showData').onclick = function() {
+       var request = new XMLHttpRequest();
+       request.open('GET', 'cit5students.json');
+       
+       request.onload = function() {
+         var data = JSON.parse(request.responseText);
+         
+         if (request.status ==200) {
+           var contents = "<table cellspacing='5'><tr><td>Name</td></tr><tr><td>Major</td></tr><tr><td>MidTerm</td></tr><tr><td>Final</td></tr>"
+           
+           for(i=0; i< data.length; i++) {
+             contents += "<tr><td>" + data[i].name = "</td><td>" + data[i].major + "</td><td>" + data[i].midterm + "</td><td>" data[i].final "</td></tr>"
+           }
+           contents += "</table>";
+           document.querySelector('#result').innerHTML = contents;
+         }
+         else {
+           document.querySelector('#result').innerHTML = "There was an error.";
+         }
+   }
+       request.send(null);
+     };
+     
+    </script>
   </head>
   <body>
     <div class = 'container'>
       <h1>Major Selector</h1>
         <form>
-          <button type="button" id="showData">CIT Major</button>
+          <button type="button" id='showData'>CIT Major</button>
       </form><br>
         <form>
-          <button type="button" id="showAnswer">Business Major</button>
+          <button type="button" id='showAnswer'>Business Major</button>
       </form><br>
       
       <p>We filter our database by Major</p>
