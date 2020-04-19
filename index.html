@@ -2,47 +2,70 @@
 
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>Students By Major</title>
- <script>
-   document.addEventListener('DOBContentLoaded', function () {
-     document.querySelector('#showData').onclick = function() {
-       var request = new XMLHttpRequest();
-       request.open('GET', 'cit5students.json');
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+    <!-- bootstrap on github, need to use https for these links -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
        
-       request.onload = function() {
-         var data = JSON.parse(request.responseText);
-         
-         if (request.status ==200) {
-           var contents = "<table cellspacing='5'><tr><td>Name</td></tr><tr><td>Major</td></tr><tr><td>MidTerm</td></tr><tr><td>Final</td></tr>"
-           
-           for(i=0; i< data.length; i++) {
-             contents += "<tr><td>" + data[i].name = "</td><td>" + data[i].major + "</td><td>" + data[i].midterm + "</td><td>" data[i].final "</td></tr>"
-           }
-           contents += "</table>";
-           document.querySelector('#result').innerHTML = contents;
-         }
-         else {
-           document.querySelector('#result').innerHTML = "There was an error.";
-         }
-   }
-       request.send(null);
-     };
-     
-    </script>
+    <style> .btn{margin: 5px} </style>
   </head>
+  
   <body>
-    <div class = 'container'>
-      <h1>Major Selector</h1>
-        <form>
-          <button type="button" id='showData'>CIT Major</button>
-      </form><br>
-        <form>
-          <button type="button" id='showAnswer'>Business Major</button>
-      </form><br>
+    <div class="container">
+      <h2>Select a Major</h2>
+      <div style='padding: 5px;'>
+        <button type='button' class="btn btn-primary" onClick="getData('cit')">CIT</button> 
+         <button type='button' class="btn btn-primary" onClick="getData('business')">Business</button> 
+      </div>
       
-      <p>We filter our database by Major</p>
-      
-      <table id="dataTable" class="table">
-        
+      <h3>We filter our database by Majors</h3>
+      <div id="majorTable"></div>
+    </div>
   </body>
+  
+  <!-- Handlebars template -->
+  <script type="text/x-handlebars-template" id="tableTemplate">
+      <table class="table table-striped">
+          <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
+             {{#each rows}}
+                <tr>
+                     <td>{{name}}</td><td>{{major}}</td><td>{{midterm}}</td><td>{{final}}</td>
+                </tr>
+             {{/each}}
+      </table>
+  </script>
+  <!-- application ajax code -->
+  <script>
+
+  function getData(selected_major) {      // called when a button is clicked. paramter selected_meal = breakfast, lunch, or dinner
+      var request = new XMLHttpRequest();
+      request.open('GET', 'cit5students.json');      // open Ajax request for data file menu_items.json
+ 
+      request.onload = function() {                     // when the data comes back, browser calls this function
+         var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
+
+         major_items = data.filter(getMajor)       // meal_itmes array will contain the filtered data using the getMeal() function
+         function getMajor(major) {
+            return item.major == selected_major;   // the new meal_items array will contain only items for the selected meal
+         }
+        
+        if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
+            var templateText = document.getElementById('tableTemplate').innerHTML;
+            var compiledTemplateText = Handlebars.compile(templateText);       
+            compiledHtml = compiledTemplateText({ rows: major_items })          
+            document.getElementById('majorTable').innerHTML = compiledHtml; 
+        }
+        else {
+            document.querySelector('#majorTable').innerHTML = "There was an error.";
+        }
+     }
+     
+     request.send(null);
+  }
+</script>
 </html>
+      
