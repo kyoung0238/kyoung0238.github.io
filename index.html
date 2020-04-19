@@ -19,7 +19,7 @@
       <h2>Select a Major</h2>
       <div style='padding: 5px;'>
         <button type='button' class="btn btn-primary" onClick="getData('cit')">CIT</button> 
-         <button type='button' class="btn btn-primary" onClick="getData('business')">Business</button> 
+        <button type='button' class="btn btn-primary" onClick="getData('business')">Business</button> 
       </div>
       
       <h3>We filter our database by Majors</h3>
@@ -48,15 +48,15 @@
       request.onload = function() {                     // when the data comes back, browser calls this function
          var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
 
-         major_items = data.filter(getMajor)       // meal_itmes array will contain the filtered data using the getMeal() function
+         major_name = data.filter(getMajor)       // meal_itmes array will contain the filtered data using the getMeal() function
          function getMajor(major) {
-            return item.major == selected_major;   // the new meal_items array will contain only items for the selected meal
+            return name.major == selected_major;   // the new meal_items array will contain only items for the selected meal
          }
         
         if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
             var templateText = document.getElementById('tableTemplate').innerHTML;
             var compiledTemplateText = Handlebars.compile(templateText);       
-            compiledHtml = compiledTemplateText({ rows: major_items })          
+            compiledHtml = compiledTemplateText({ rows: major_name })          
             document.getElementById('majorTable').innerHTML = compiledHtml; 
         }
         else {
