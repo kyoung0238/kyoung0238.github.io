@@ -52,7 +52,7 @@
          var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
 
          major_name = data.filter(getMajor)       // major_name array will contain the filtered data using the getMajor() function
-         function getMajor() {
+         function getData() {
             return name.major == selected_major;   // the new major_name array will contain only items for the selected major
          }
         
@@ -71,29 +71,5 @@
      request.send(null);
   }
 </script>
-	
-	<script>
-   document.addEventListener('DOBContentLoaded', function () {
-     document.querySelector('#showData').onclick = function() {
-       var request = new XMLHttpRequest();
-       request.open('GET', 'cit5students.json');
-       
-       request.onload = function() {
-         var data = JSON.parse(request.responseText);
-         
-         if (request.status ==200) {
-           var contents = "<table cellspacing='5'><tr><td>Name</td></tr><tr><td>Major</td></tr><tr><td>MidTerm</td></tr><tr><td>Final</td></tr>"
-           
-           for(i=0; i< data.length; i++) {
-             contents += "<tr><td>" + data[i].name = "</td><td>" + data[i].major + "</td><td>" + data[i].midterm + "</td><td>" data[i].final "</td></tr>"
-           }
-           contents += "</table>";
-           document.querySelector('#result').innerHTML = contents;
-         }
-   }
-       request.send(null);
-     };
-     
-    </script>
 </html>
       
