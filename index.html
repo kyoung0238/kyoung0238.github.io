@@ -16,9 +16,11 @@
   <div class="container">
       <h2>Select a Major</h2>
       <div style='padding: 5px;'> 
-         <button type='button' class="btn btn-primary" onClick="getData('business')">Business Major</button> 
-         <button type='button' class="btn btn-primary" onClick="getData('cit')">CIT Major</button> 
-      </div>
+        <form>
+         <button type='button' id='getData' class="btn btn-primary" onClick="getData('business')">Business Major</button> 
+         <button type='button' id='getData' class="btn btn-primary" onClick="getData('cit')">CIT Major</button> 
+          </form>
+       </div>
   
   <h3>We filter our dataset by majors</h3>
   <div id="majorTable"></div>
