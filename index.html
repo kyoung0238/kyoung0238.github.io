@@ -3,6 +3,22 @@
 <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>students by major</title>
 
+</head>
+
+<body>
+  <div class="container">
+      <h2>Select a Major</h2>
+      <div style='padding: 5px;'> 
+        <form>
+         <button type='button' class="btn btn-primary" onClick="getData()">Business Major</button> 
+         <button type='button' class="btn btn-primary" onClick="getMajor()">CIT Major</button> 
+          </form>
+       </div>
+  
+  <h3>We filter our dataset by majors</h3>
+  <div id="majorTable"></div>
+  </div>   <!-- end class='container'   -->	
+	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
     <!-- bootstrap on github, need to use https for these links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -29,48 +45,21 @@
   function getData() {      
       var request = new XMLHttpRequest();
       request.open('GET', 'cit5students.json');      
-      var div1 = document.getElementById("majorTable");
-	var name.major == Business;
-	request.onload = getData() {
-         var data = JSON.parse(request.responseText);    
-         major_name = data.filter(getMajor)       
-   function getMajor() {
-	   var request = new XMLHttpRequest();
-      request.open('GET', 'cit5students.json');
-	   var div1 = document.getElementById("majorTable");
-       var name.major == CIT;
-         }
-      }
-        
-        if (request.status == 200) {    
-            var templateText = document.getElementById('tableTemplate').innerHTML;
-            var compiledTemplateText = Handlebars.compile(templateText);       
-            compiledHtml = compiledTemplateText({ rows: major_name })          
-            document.getElementById('majorTable').innerHTML = compiledHtml; 
+	request.onload = function() {
+		var data = JSON.parse(request.responseText0;
+		
+		if (request.status == 200) {
+		document.querySelector('#reslut').innerHTML = contents;
         }
-        else {
-            document.querySelector('#majorTable').innerHTML = "There was an error";
-        }
-     
+		else {
+			document.querySelector('#result').innerHTML = "There was an error.";
+	}
      request.send(null);
   }
+  });	  
 </script>  
     
-</head>
 
-<body>
-  <div class="container">
-      <h2>Select a Major</h2>
-      <div style='padding: 5px;'> 
-        <form>
-         <button type='button' class="btn btn-primary" onClick="getData()">Business Major</button> 
-         <button type='button' class="btn btn-primary" onClick="getMajor()">CIT Major</button> 
-          </form>
-       </div>
-  
-  <h3>We filter our dataset by majors</h3>
-  <div id="majorTable"></div>
-  </div>   <!-- end class='container'   -->
   </body>
 
 
