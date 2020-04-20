@@ -47,12 +47,13 @@
   function getData(selected_major) {      // called when a button is clicked. paramter selected_major = business or cit
       var request = new XMLHttpRequest();
       request.open('GET', 'cit5students.json');      // open Ajax request for data file cit5students.json
- 
+
       request.onload = function() {                     // when the data comes back, browser calls this function
          var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
 
-         major_name = data.filter(getMajor)       // major_name array will contain the filtered data using the getMajor() function
-         function getData() {
+         major_name = data.filter(getData)       // major_name array will contain the filtered data using the getMajor() function
+      }
+	    function getData() {
             return name.major == selected_major;   // the new major_name array will contain only items for the selected major
          }
         
@@ -62,11 +63,10 @@
             compiledHtml = compiledTemplateText({ rows: major_name })          
             document.getElementById('majorTable').innerHTML = compiledHtml; 
         }
-	      
+	  }      
         else {
             document.querySelector('#majorTable').innerHTML = "There was an error.";
         }
-     }
      
      request.send(null);
   }
