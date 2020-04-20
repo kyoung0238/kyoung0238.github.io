@@ -26,16 +26,14 @@
   <!-- application ajax code -->
   <script>
 
-  function getData() {      // called when a button is clicked. paramter selected_major = breakfast, lunch, or dinner
+  function getData() {      
       var request = new XMLHttpRequest();
-      request.open('GET', cit5students.json');      // open Ajax request for data file cit5students.json
- 
-      request.onload = function() {                     // when the data comes back, browser calls this function
-         var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
-
-         major_name = data.filter(getMajor)       // major_itmes array will contain the filtered data using the getMeal() function
+      request.open('GET', cit5students.json');      
+      request.onload = function() {
+         var data = JSON.parse(request.responseText);    
+         major_name = data.filter(getMajor)       
          function getMajor() {
-            return name.major == selected_major;   // the new major_name array will contain only name for the selected major
+            return name.major == selected_major;   
          var x = document.getElementById("getData");
          if (x.style.display === "none") {
               x.style.display = "block";
@@ -45,7 +43,7 @@
             }
          }
         
-        if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
+        if (request.status == 200) {    
             var templateText = document.getElementById('tableTemplate').innerHTML;
             var compiledTemplateText = Handlebars.compile(templateText);       
             compiledHtml = compiledTemplateText({ rows: major_name })          
