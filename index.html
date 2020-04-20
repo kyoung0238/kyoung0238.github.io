@@ -26,18 +26,19 @@
   <!-- application ajax code -->
   <script>
 
-  function getData(business) {      
+  function getData() {      
       var request = new XMLHttpRequest();
-      request.open('GET', cit5students.json');      
-      var return name.major == Business;
-	request.onload = function() {
+      request.open('GET', 'cit5students.json');      
+      var div1 = document.getElementById("majorTable");
+	var return name.major == Business;
+	request.onload = getData() {
          var data = JSON.parse(request.responseText);    
          major_name = data.filter(getMajor)       
-   function getMajor(cit) {
+   function getMajor() {
 	   var request = new XMLHttpRequest();
-      request.open('GET', cit5students.json');
+      request.open('GET', 'cit5students.json');
+	   var div1 = document.getElementById("majorTable");
        var return name.major == CIT;
-	;
          }
       }
         
