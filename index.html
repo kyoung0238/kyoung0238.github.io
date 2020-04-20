@@ -55,7 +55,7 @@
       }
 	    function getData() {
             return name.major == selected_major;   // the new major_name array will contain only items for the selected major
-         }
+            }
         
         if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
             var templateText = document.getElementById('tableTemplate').innerHTML;
@@ -63,11 +63,7 @@
             compiledHtml = compiledTemplateText({ rows: major_name })          
             document.getElementById('majorTable').innerHTML = compiledHtml; 
         }
-	  }      
-        else {
-            document.querySelector('#majorTable').innerHTML = "There was an error.";
-        }
-     
+	
      request.send(null);
   }
 </script>
