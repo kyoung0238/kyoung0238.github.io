@@ -29,12 +29,15 @@
   function getData() {      
       var request = new XMLHttpRequest();
       request.open('GET', cit5students.json');      
-      request.onload = function() {
+      var return name.major == Business;
+	request.onload = function() {
          var data = JSON.parse(request.responseText);    
          major_name = data.filter(getMajor)       
-         function getMajor() {
-            return name.major == CIT;
-			return name.major == Business;
+   function getMajor() {
+	   var request = new XMLHttpRequest();
+      request.open('GET', cit5students.json');
+       var return name.major == CIT;
+	;
          }
       }
         
@@ -60,7 +63,7 @@
       <div style='padding: 5px;'> 
         <form>
          <button type='button' class="btn btn-primary" onClick="getData()">Business Major</button> 
-         <button type='button' class="btn btn-primary" onClick="getData()">CIT Major</button> 
+         <button type='button' class="btn btn-primary" onClick="getMajor()">CIT Major</button> 
           </form>
        </div>
   
