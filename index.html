@@ -26,7 +26,7 @@
   <!-- application ajax code -->
   <script>
 
-  function getData(selected_major) {      // called when a button is clicked. paramter selected_major = breakfast, lunch, or dinner
+  function getData() {      // called when a button is clicked. paramter selected_major = breakfast, lunch, or dinner
       var request = new XMLHttpRequest();
       request.open('GET', cit5students.json');      // open Ajax request for data file cit5students.json
  
@@ -34,8 +34,15 @@
          var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
 
          major_name = data.filter(getMajor)       // major_itmes array will contain the filtered data using the getMeal() function
-         function getMajor(name) {
+         function getMajor() {
             return name.major == selected_major;   // the new major_name array will contain only name for the selected major
+         var x = document.getElementById("getData");
+         if (x.style.display === "none") {
+              x.style.display = "block";
+          }
+         else {
+             x.style.display = "none";
+            }
          }
         
         if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
@@ -60,8 +67,8 @@
       <h2>Select a Major</h2>
       <div style='padding: 5px;'> 
         <form>
-         <button type='button' id='getData' class="btn btn-primary" value="show" onClick="getData('business')">Business Major</button> 
-         <button type='button' id='getData' class="btn btn-primary" value="show" onClick="getData('cit')">CIT Major</button> 
+         <button type='button' id='getData' class="btn btn-primary" onClick="getData()">Business Major</button> 
+         <button type='button' id='getData' class="btn btn-primary" onClick="getData()">CIT Major</button> 
           </form>
        </div>
   
