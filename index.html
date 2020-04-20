@@ -3,29 +3,30 @@
 <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>students by major</title>
 
-</head>
-
-<body>
-  <div class="container">
-      <h2>Select a Major</h2>
-      <div style='padding: 5px;'> 
-        <form>
-         <button type='button' class="btn btn-primary" onClick="getData()">Business Major</button> 
-         <button type='button' class="btn btn-primary" onClick="getMajor()">CIT Major</button> 
-          </form>
-       </div>
-  
-  <h3>We filter our dataset by majors</h3>
-  <div id="majorTable"></div>
-  </div>   <!-- end class='container'   -->	
-	
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
     <!-- bootstrap on github, need to use https for these links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style> .btn{margin: 5px} </style>
+</head>
+
+<body>
+  <div class="container">
+      <h2>Select a Major</h2>
+      <div style='padding: 5px;'> 
+  
+         <button type='button' class="btn btn-primary" onClick="getData()">Business Major</button> 
+         <button type='button' class="btn btn-primary" onClick="getMajor()">CIT Major</button> 
+    
+       </div>
+  
+  <h3>We filter our dataset by majors</h3>
+  <div id="majorTable"></div>
+  </div>   <!-- end class='container'   -->	
+	
+</body>
     
    <!-- Handlebars template -->
   <script type="text/x-handlebars-template" id="tableTemplate">
@@ -42,14 +43,21 @@
   <!-- application ajax code -->
   <script>
 
-  function getData() {      
+  function getData(selected_major) {      
       var request = new XMLHttpRequest();
       request.open('GET', 'cit5students.json');      
 	request.onload = function() {
-		var data = JSON.parse(request.responseText0;
-		
-		if (request.status == 200) {
-		document.querySelector('#reslut').innerHTML = contents;
+		var data = JSON.parse(request.responseText);
+	
+		major_name = data.filter(getData)
+		function getData(major) {
+		     return item.major == selected_major;
+		}
+	     if (request.status == 200) {
+		var templateText = document.getElementById('tableTemplate').innerHTML;
+		var compiledTemplateTect = Handlebars.compile(templateText);
+		compiledHTML = compiledTemplateText({ rows: major_name })
+		document.querySelector('#reslut').innerHTML = compiledHTML;
         }
 		else {
 			document.querySelector('#result').innerHTML = "There was an error.";
@@ -58,9 +66,7 @@
   }
   });	  
 </script>  
-    
-
-  </body>
+   
 
 
 </html>
