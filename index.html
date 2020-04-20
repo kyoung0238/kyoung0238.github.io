@@ -37,7 +37,6 @@
 			return name.major == Business;
          }
       }
-  }
         
         if (request.status == 200) {    
             var templateText = document.getElementById('tableTemplate').innerHTML;
@@ -48,7 +47,6 @@
         else {
             document.querySelector('#majorTable').innerHTML = "There was an error";
         }
-     }
      
      request.send(null);
   }
