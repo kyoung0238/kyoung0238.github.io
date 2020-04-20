@@ -17,7 +17,7 @@
   
   <body>
     <div class="container">
-      <h4>Select a Major</h4>
+      <h2>Select a Major</h2>
       <div style='padding: 5px;'>
         <button type='button' class="btn btn-primary" onClick="getData()">CIT</button> 
         <button type='button' class="btn btn-primary" onClick="getData()">Business</button> 
@@ -25,7 +25,7 @@
       
       <h3>We filter our database by Majors</h3>
       <div id="majorTable"></div>
-    </div> <!-- end of class container -->
+    </div> 
   </body>
   
   <!-- Handlebars template -->
@@ -51,19 +51,18 @@
       request.onload = function() {                     // when the data comes back, browser calls this function
          var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
 
-         major_name = data.filter(getData)       // major_name array will contain the filtered data using the getMajor() function
-      }
+         major_name = data.filter(getMajor);      // major_name array will contain the filtered data using the getMajor() function
 	    function getData() {
             return name.major == selected_major;   // the new major_name array will contain only items for the selected major
             }
         
-        if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
+        if (request.status == 500) {    // if all is well as data returns, then compile and populate the template
             var templateText = document.getElementById('tableTemplate').innerHTML;
             var compiledTemplateText = Handlebars.compile(templateText);       
             compiledHtml = compiledTemplateText({ rows: major_name })          
             document.getElementById('majorTable').innerHTML = compiledHtml; 
         }
-	
+      }
      request.send(null);
   }
 </script>
