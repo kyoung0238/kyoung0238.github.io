@@ -10,24 +10,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style> .btn{margin: 5px} </style>
-</head>
-
-<body>
-  <div class="container">
-      <h2>Select a Major</h2>
-      <div style='padding: 5px;'> 
-        <form>
-         <button type='button' id='getData' class="btn btn-primary" onClick="getData('business')">Business Major</button> 
-         <button type='button' id='getData' class="btn btn-primary" onClick="getData('cit')">CIT Major</button> 
-          </form>
-       </div>
-  
-  <h3>We filter our dataset by majors</h3>
-  <div id="majorTable"></div>
-  </div>   <!-- end class='container'   -->
-  </body>
-
- <!-- Handlebars template -->
+    
+   <!-- Handlebars template -->
   <script type="text/x-handlebars-template" id="tableTemplate">
       <table class="table table-striped">
           <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
@@ -67,5 +51,24 @@
      
      request.send(null);
   }
-</script>
+</script>  
+    
+</head>
+
+<body>
+  <div class="container">
+      <h2>Select a Major</h2>
+      <div style='padding: 5px;'> 
+        <form>
+         <button type='button' id='getData' class="btn btn-primary" onClick="getData('business')">Business Major</button> 
+         <button type='button' id='getData' class="btn btn-primary" onClick="getData('cit')">CIT Major</button> 
+          </form>
+       </div>
+  
+  <h3>We filter our dataset by majors</h3>
+  <div id="majorTable"></div>
+  </div>   <!-- end class='container'   -->
+  </body>
+
+
 </html>
