@@ -1,1 +1,58 @@
+<!DOCTYPE html> <!-- Katherine Young / April 15, 2020 / Program 5 -->
+<html lang="en">
+	<head> 
+		<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>ALL ADVISEES</title>
+		
+		
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+	<!-- the template -->
+		<script id="text-template" type="text/x-handlebars-template">
+		</script>
+	</head>
+ 
+	<body>
+		<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Our Website</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#index">All Advisees</a></li>
+					<li><a href="#gpa">Grade Point Average</a></li>
+				</ul>
+			</div>
+		</div>
+		</nav>    <!-- end nav-bar -->
+	
+	<div ng-app="myApp" ng-controller="myCtrl">
 
+	<table ng-controller="myCtrl">
+		<tr ng-repeat="x in records">
+			<td>{{x.sid}}</td>
+			<td>{{x.firstname}}</td>
+			<td>{{x.lastname}}</td>
+			<td>{{x.credithrs}}</td>
+			<td>{{x.gpapoints}}</td>
+			<td>{{x.major}}</td>
+		</tr>
+		
+		<script>
+		var app = angular.module("myApp", []);
+		
+		app.controller("myCtrl", function($scope, $http) {
+		$http.get("students.json")		//get the students table
+		 .then(function (response) {
+			$scope.students = response.data;
+		});
+		</script>
+	</div>	
+		
+</body>
+</html>
+	
