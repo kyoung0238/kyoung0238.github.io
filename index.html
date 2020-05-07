@@ -30,26 +30,34 @@
 		</div>
 		</nav>    <!-- end nav-bar -->
 	
-	<div ng-app="myApp" ng-controller="myCtrl">
+	<div ng-app="myApp" ng-controller="studentsCtrl">
 
-	<table ng-controller="myCtrl">
-		<tr ng-repeat="x in records">
-			<td>{{sid}}</td>
-			<td>{{firstname}}</td>
-			<td>{{lastname}}</td>
-			<td>{{credithrs}}</td>
-			<td>{{gpapoints}}</td>
-			<td>{{major}}</td>
+	<table ng-controller="studentsCtrl">
+		<tr><th>sid</th><th>First Name</th><th>Last Name</th><th>Credit Hours</th><th>GPA Points</th><th>Major</th></tr>
+		<tr ng-repeat="x in students">
+			<td>{{x.sid}}</td>
+			<td>{{x.firstname}}</td>
+			<td>{{x.lastname}}</td>
+			<td>{{x.credithrs}}</td>
+			<td>{{x.gpapoints}}</td>
+			<td>{{x.major}}</td>
 		</tr>
-		
+	</table>
+	
 		<script>
 		var app = angular.module("myApp", []);
 		
-		app.controller("myCtrl", function($scope, $http) {
+		app.controller("studentsCtrl", function($scope, $http) {
+		$scope.getStdudents=function(students) {
+			$scope.students=students;
+			var url = "students.json";
+			
 		$http.get("students.json")		//get the students table
 		 .then(function (response) {
 			$scope.students = response.data;
 		});
+	   };
+	  });
 		</script>
 	</div>	
 		
