@@ -1,78 +1,81 @@
-<!DOCTYPE html>
-<html><head><title>cars 4 sale</title>
-<link rel="stylesheet"     href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!DOCTYPE html> <!-- Katherine Young / April 15, 2020 / Program 5 -->
+<html lang="en">
+	<head> 
+		<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>ALL ADVISEES</title>
+		
+		
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script> 
- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+	<!-- the template -->
+		<script id="text-template" type="text/x-handlebars-template">
+		</script>
+	</head>
+ 
+	<body>
+		<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Our Website</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#index">All Advisees</a></li>
+					<li><a href="#gpa">Grade Point Average</a></li>
+				</ul>
+			</div>
+		</div>
+		</nav>    <!-- end nav-bar -->
+		
+		<h1>Advisees</h1>
+			<p><input type='text' ng-model='search_text' > Enter Search text</p>
+          <table class="table table-bordered table-striped">
+	
+	<div ng-app="myApp" ng-controller="studentsCtrl">
 
-</head>
-<body>
-
-<div class="container">
-<nav class="navbar navbar-inverse">
-
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">Our Website</a>
-    </div>
-    <div>
-       <ul class="nav navbar-nav">
-           <li class="active"><a href="#home">Welcome</a></li>
-           <li><a href="#all_cars">All the Cars</a></li>
-       </ul>
-    </div>
-
-</nav>    <!-- end nav-bar -->
-
-<div ng-app = "carsApp">
-
-
-     <div ng-view></div>    <!-- partial pages substituted here -->
-  
-
-</div>   <!-- end carsApp -->
-</div>   <!-- end class= 'container' -->
-
-<script>
-var app = angular.module('carsApp', ['ngRoute']);
-
-app.config(function($routeProvider) {
-    $routeProvider 
-      .when('/', {
-          templateUrl : 'partials/home.html',    // route for the home page
-          controller : 'homeCtrl'
-      })
-      .when('/home', {
-          templateUrl : 'partials/home.html',
-          controller : 'homeCtrl'
-      })
-      .when('/all_cars', {
-          templateUrl : 'partials/all_cars.html',    // show all cars
-          controller : 'allCtrl'
-      })
-      .otherwise({
-          redirectTo: 'partials/home.html'        // any other URL goes to home
-      });
-});
-
-
-          /*   a controller for each page  */
-app.controller('homeCtrl', function($scope, $http) {
-  
-     var today = new Date();  /* get today's date */
-     $scope.date= today.toDateString()
-	   
-});
-		  
-		  
-app.controller('allCtrl', function($scope, $http) {
-    
-   $http.get("cars.json")          // get all the cars table
-     .then(function (response) {
-	    $scope.cars = response.data;  
-     });
-
-});
-
-</script>
-</body></html>
+	<div class="table-responsive">
+      
+	  <table ng-controller="studentsCtrl" class="table table-bordered table-striped">
+	
+		<tr>
+			<th>sid</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Credit Hours</th>
+			<th>GPA Points</th>
+			<th>Major</th>
+		</tr>
+		<tr ng-repeat="x in students | filter: search_text ">
+			<td>{{x.sid}}</td>
+			<td>{{x.firstname}}</td>
+			<td>{{x.lastname}}</td>
+			<td>{{x.credithrs}}</td>
+			<td>{{x.gpapoints}}</td>
+			<td>{{x.major}}</td>
+		</tr>
+	</table>
+	
+		<script>
+		var app = angular.module("myApp", ["ng"]);
+		
+		app.controller("studentsCtrl", function($scope, $http) {
+		$scope.getStdudents=function(students) {
+			$scope.students=students;
+			var url = "students.json";
+			
+		$http.get("students.json")		//get the students table
+		 .then(function (response) {
+			$scope.students = response.data;
+		});
+	   };
+	  });
+		</script>
+	</div>
+</div>	
+		
+</body>
+</html>
+	
