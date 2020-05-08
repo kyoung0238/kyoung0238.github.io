@@ -54,8 +54,14 @@
 				$scope.students = response.data;
 			});
 		
-	});
-		
+	});	
+	</script>
+	<script>
+	var rawbase = 'https://raw.githubusercontent.com/';
+	var jsonloc = 'kyoung0238/kyoung0238.github.io/master/students.json';
+		$.getJSON(rawbase + jsonloc, function( data ) {
+			console.log(data);
+		});
 	</script>
 	</body>
 </html>
