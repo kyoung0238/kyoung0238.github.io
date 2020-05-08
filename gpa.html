@@ -23,7 +23,7 @@
 		</div>
 	</nav>         <!--end of nav bar -->
 	
-	<div ng-controller = "allCtrl">
+	<div ng-controller = "gpaCtrl">
 	
 	<h1>Advisees</h1>
 		<p><input type="text" ng-model="search_text">Enter Seaarch Text</p>
@@ -47,21 +47,14 @@
 	<script>
 	var app= angular.module('homeApp', []);
 	
-	app.controller("allCtrl", function($scope, $http) {
+	app.controller("gpaCtrl", function($scope, $http) {
 		
-		$http.get("students.json")
-			.then(function (response) {
-				$scope.students = response.data;
+		$http.get("/students.json")
+			.then(function (result) {
+				$scope.students = result.data;
 			});
 		
 	});	
-	</script>
-	<script>
-	var rawbase = 'https://raw.githubusercontent.com/';
-	var jsonloc = 'kyoung0238/kyoung0238.github.io/master/students.json';
-		$.getJSON(rawbase + jsonloc, function( data ) {
-			console.log(data);
-		});
 	</script>
 	</body>
 </html>
