@@ -36,7 +36,7 @@
 				<th>gpa</th>
 			</tr>
 			<tr ng-repeat= "student in students | filter:search_text ">
-				<td>{{students.sid}}</td>
+				<td>{{students.id}}</td>
 				<td>{{students.last_name}}</td>
 				<td>{{students.first_name}}</td>
 				<td>{{(students.gpa_points / students.credit_hrs).toFixed(1)}}</td>
