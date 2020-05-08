@@ -50,7 +50,7 @@
 	
 	app.controller("gpaCtrl", function($scope, $http) {
 		
-		$http.get("/students.json")
+		$http.get("https://kyoung0238.github.io/students.json")
 			.then(function (result) {
 				$scope.students = result.data;
 			});
