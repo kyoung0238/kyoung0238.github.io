@@ -21,8 +21,8 @@
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="/indexhtml">All Advisees</a></li>
-					<li><a href="/gpa.html">Grade Point Average</a></li>
+					<li class="active"><a href="#index">All Advisees</a></li>
+					<li><a href="#gpa">Grade Point Average</a></li>
 				</ul>
 			</div>
 		</div>
@@ -34,18 +34,28 @@
 	
 	<div ng-app="myApp" ng-controller="studentsCtrl">
 
-	<div class="table-responsive">
-      
+	<div id="tableResponsive">
+     
+</body>
 	  <!-- handlebars template -->
-		<script type="text/x-handlebars-template" id="text-template">
+		<script type="text/x-handlebars-template" id="textTemplate">
+			
 		<table>
+		<tr>
+			<th>Sid</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Credit Hours</th>
+			<th>GPA Points</th>
+			<th>Major</th>
+		</tr>
 			{{#each rows}}
 				<tr>
 					<td>{{sid}}</td>
-					<td>{{First Name}}</td>
-					<td>{{Last Name}}</td>
-					<td>{{Credit Hours}}</td>
-					<td>{{GPA Points}}</td>
+					<td>{{First_Name}}</td>
+					<td>{{Last_Name}}</td>
+					<td>{{Credit_Hours}}</td>
+					<td>{{GPA_Points}}</td>
 					<td>{{Major}}</td>
 				</tr>
 				{{/each}}
@@ -61,32 +71,23 @@
       request.onload = function() {                       // when the data comes back, do this...
           var data = JSON.parse(request.responseText);    // de-stringify JSON back to regular array of JavaScript objects
           if (request.status == 200) {
-              var templateText = document.getElementById('tableTemplate').innerHTML;  // Get template text 
+              var templateText = document.getElementById('textTemplate').innerHTML;  // Get template text 
               var compiledTemplateText = Handlebars.compile(templateText);         // Compile the Handlebars template
               compiledHtml = compiledTemplateText({ rows: data })                  // populate the template with the data 
-              document.getElementById('text-template').innerHTML = compiledHtml; 	// put html table into division
+              document.getElementById('tableResponsive').innerHTML = compiledHtml; 	// put html table into division
           }
           else {
-             document.querySelector('#text-template').innerHTML = "There was an error, or data not found";
+             document.querySelector('#tableResponsive').innerHTML = "There was an error, or data not found";
           }
       }        // end request.onload
 		
 		
-	  <table ng-controller="studentsCtrl" class="table table-bordered table-striped">
+	  
 	</script>
+		<table ng-controller="studentsCtrl" class="table table-bordered table-striped">
 		
-	  <table ng-controller="studentsCtrl" class="table table-bordered table-striped">
-	
-		<tr>
-			<th>sid</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Credit Hours</th>
-			<th>GPA Points</th>
-			<th>Major</th>
-		</tr>
 		<tr ng-repeat="x in students | filter: search_text ">
-			<td>{{x.sid}}</td>
+			<td>{{x.Sid}}</td>
 			<td>{{x.firstname}}</td>
 			<td>{{x.lastname}}</td>
 			<td>{{x.credithrs}}</td>
@@ -113,6 +114,6 @@
 	</div>
 </div>	
 		
-</body>
+
 </html>
 	
