@@ -1,7 +1,7 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
-	<meta charset="UTF-8">	
+	<meta charset="UTF-8">
 		<title>All Advisees</title>
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -24,7 +24,7 @@
 		</div>
 	</nav>         <!--end of nav bar -->
 	
-	<div ng-controller = "gpaCtrl">
+	<div ng-controller = "allCtrl">
 	
 	<h1>Advisees</h1>
 		<p><input type="text" ng-model="search_text">Enter Seaarch Text</p>
@@ -39,20 +39,20 @@
 				<td>{{students.id}}</td>
 				<td>{{students.last_name}}</td>
 				<td>{{students.first_name}}</td>
-				<td>{{(students.gpa_points / students.credit_hrs).toFixed(1)}}</td>
+				<td>{{(students.gpa_points / student.credit_hrs).toFixed(1)}}</td>
 			</tr>
 		</table>
-	</div>    <!-- end gpaCtrl -->
+	</div>    <!-- end homeApp -->
 	</div>    <!-- end class="container" -->
 			
 	<script>
 	var app= angular.module('homeApp', []);
 	
-	app.controller("gpaCtrl", function($scope, $http) {
+	app.controller('allCtrl', function($scope, $http) {
 		
-		$http.get("https://kyoung0238.github.io/students.json")
-			.then(function (result) {
-				$scope.students = result.data;
+		$http.get("students.json")
+			.then(function (response) {
+				$scope.students = response.data;
 			});
 		
 	});	
