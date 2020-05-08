@@ -31,16 +31,16 @@
 		<h1>Advisees</h1>
 			<p><input type='text' ng-model='search_text' > Enter Search text</p>
           <table class="table table-bordered table-striped">
-	
-	<div ng-app="myApp" ng-controller="studentsCtrl">
+</body>	
+
 
 	<div id="tableResponsive">
      
-</body>
+
 	  <!-- handlebars template -->
 		<script type="text/x-handlebars-template" id="textTemplate">
 			
-		<table>
+		<table ng-controller="studentsCtrl" class="table table-bordered table-striped">
 		<tr>
 			<th>Sid</th>
 			<th>First Name</th>
@@ -48,17 +48,16 @@
 			<th>Credit Hours</th>
 			<th>GPA Points</th>
 			<th>Major</th>
+		
+		<tr ng-repeat="x in students | filter: search_text ">
+			<td>{{x.Sid}}</td>
+			<td>{{x.firstname}}</td>
+			<td>{{x.lastname}}</td>
+			<td>{{x.credithrs}}</td>
+			<td>{{x.gpapoints}}</td>
+			<td>{{x.major}}</td>
 		</tr>
-			{{#each rows}}
-				<tr>
-					<td>{{sid}}</td>
-					<td>{{First_Name}}</td>
-					<td>{{Last_Name}}</td>
-					<td>{{Credit_Hours}}</td>
-					<td>{{GPA_Points}}</td>
-					<td>{{Major}}</td>
-				</tr>
-				{{/each}}
+	</table>
 			</table>
 		</script>
 		
@@ -84,35 +83,46 @@
 		
 	  
 	</script>
-		<table ng-controller="studentsCtrl" class="table table-bordered table-striped">
 		
-		<tr ng-repeat="x in students | filter: search_text ">
-			<td>{{x.Sid}}</td>
-			<td>{{x.firstname}}</td>
-			<td>{{x.lastname}}</td>
-			<td>{{x.credithrs}}</td>
-			<td>{{x.gpapoints}}</td>
-			<td>{{x.major}}</td>
-		</tr>
-	</table>
 	
 		<script>
-		var app = angular.module("myApp", ["ng"]);
+		var app = angular.module("myApp", ["ngRoute"]);
 		
-		app.controller("studentsCtrl", function($scope, $http) {
-		$scope.getStdudents=function(students) {
-			$scope.students=students;
-			var url = "students.json";
-			
-		$http.get("students.json")		//get the students table
-		 .then(function (response) {
-			$scope.students = response.data;
-		});
-	   };
-	  });
+		app.config(function($routeProvider) {
+      $routeProvider 
+        .when('/', {
+            templateUrl : 'pages/index.html',  // route for home page
+            controller  : 'mainController'
+        })
+
+        .when('/index', {
+            templateUrl : 'pages/index.html',  // also home page
+            controller  : 'mainController'
+        })
+
+        .when('/gpa', {
+            templateUrl : 'pages/gpa.html',  // route for 2ed page
+            controller  : 'pg2Controller'
+        })
+
+        .otherwise({
+            redirectTo: 'pages/home.html'   // other URLs goes to home
+        });
+  });
+
+     /*   a controller for each page  */
+
+  app.controller('mainController', function($scope) {
+      $scope.message = 'This is the main page content.';
+  });
+
+  app.controller('pg2Controller', function($scope) {
+      $scope.message = 'This is the content for gpa.';
+  });
+
+  
 		</script>
-	</div>
-</div>	
+	</div>	
 		
 
 </html>
